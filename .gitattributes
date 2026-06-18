@@ -1,31 +1,16 @@
-# 自动检测文本文件
-* text=auto
+# Treat all files in the Go repo as binary, with no git magic updating
+# line endings. This produces predictable results in different environments.
+#
+# Windows users contributing to Go will need to use a modern version
+# of git and editors capable of LF line endings.
+#
+# Windows .bat files are known to have multiple bugs when run with LF
+# endings, and so they are checked in with CRLF endings, with a test
+# in test/winbatch.go to catch problems. (See golang.org/issue/37791.)
+#
+# We'll prevent accidental CRLF line endings from entering the repo
+# via the git-codereview gofmt checks and tests.
+#
+# See golang.org/issue/9281.
 
-# 笔记文件强制 LF（跨平台兼容）
-*.md text eol=lf
-
-# TXT 文件强制 CRLF（Windows 原生格式）
-*.txt text eol=crlf
-
-# 配置文件强制 LF（跨平台兼容）
-*.json text eol=lf
-*.toml text eol=lf
-*.yaml text eol=lf
-*.yml text eol=lf
-
-# 脚本文件强制 LF（跨平台兼容）
-*.sh text eol=lf
-*.bat text eol=crlf
-
-# 二进制文件不处理
-*.png binary
-*.jpg binary
-*.jpeg binary
-*.gif binary
-*.ico binary
-*.pdf binary
-*.zip binary
-*.exe binary
-*.dll binary
-*.ttf binary
-*.otf binary
+* -text
